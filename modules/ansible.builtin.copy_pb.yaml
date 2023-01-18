@@ -1,0 +1,17 @@
+- name: Example playbook copy module
+  gather_facts: no
+  hosts: localhost
+  tasks:
+    - name: Copy JDK binary
+      vars: 
+        java_home: "/tmp/jdk"
+        repo_dir: "/repo/sw/jdk/binaries/1.8.0_271"
+        jdk_filename: "jdk-8u271-solaris-sparcv9.tar.gz"
+        user: "oracle"
+        group: "oracle"
+      ansible.builtin.copy: 
+        src: "{{ repo_dir }}/{{ jdk_filename }}"
+        dest: "{{ java_home }}"
+        owner: "{{ user }}"
+        group: "{{ group }}"
+

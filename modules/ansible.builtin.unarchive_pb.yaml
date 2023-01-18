@@ -1,0 +1,19 @@
+- name: Example playbook unarchive module
+  gather_facts: no
+  hosts: localhost
+  tasks:
+    - name: Installing JDK in {{ java_home }}
+      vars: 
+        java_home: "/tmp/jdk"
+        repo_dir: "/repo/sw/jdk/binaries/1.8.0_271"
+        jdk_filename: "jdk-8u271-solaris-sparcv9.tar.gz"
+        user: "oracle"
+        group: "oracle"
+      ansible.builtin.unarchive:
+        src: "{{ repo_dir }}/{{ jdk_filename }}"
+        dest: "{{ java_home }}" # MUST be an existing dir
+        remote_src: yes
+        creates: "{{ java_home }}/bin/java"
+        owner: "{{ user }}"
+        group: "{{ group }}"
+
