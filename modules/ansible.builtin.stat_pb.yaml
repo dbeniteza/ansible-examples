@@ -1,0 +1,16 @@
+- name: Example playbook stat directory
+  gather_facts: no
+  hosts: localhost
+  tasks:
+    - name: Get stats of the directory "/tmp/jdk"
+      vars: 
+        install_dir: "/tmp/jdk"
+      ansible.builtin.stat: 
+        path: "{{install_dir}}"
+      register: stat_output
+    - ansible.builtin.debug: 
+        msg: "Path: {{ stat_output.stat.path }}, 
+        Group: {{ stat_output.stat.gr_name }}, 
+        Mode: {{ stat_output.stat.mode }}, 
+        Size: {{ stat_output.stat.size }}"
+
