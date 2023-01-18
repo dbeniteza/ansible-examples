@@ -1,0 +1,15 @@
+- name: Example playbook create directory
+  gather_facts: no
+  hosts: localhost
+  tasks:
+    - name: Create JDK directory "/tmp/jdk"
+      vars: 
+        install_dir: "/tmp/jdk"
+        user: "oracle"
+        group: "oracle"
+      ansible.builtin.file:
+        state: directory
+        dest: "{{ install_dir }}"
+        owner: "{{ user }}"
+        group: "{{ group }}"
+
